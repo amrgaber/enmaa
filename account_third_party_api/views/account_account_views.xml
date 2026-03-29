@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_form_third_party" model="ir.ui.view">
+        <field name="name">account.account.form.third.party</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <notebook>
+                    <page string="Third Party" name="third_party">
+                        <group>
+                            <group>
+                                <field name="third_party_id"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>

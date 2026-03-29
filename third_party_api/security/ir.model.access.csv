@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_third_party_customer_service,third.party.customer.service,model_third_party_customer_service,,1,1,1,0
+access_third_party_debtor_service,third.party.debtor.service,model_third_party_debtor_service,,1,1,1,0
+access_third_party_contact_service,third.party.contact.service,model_third_party_contact_service,,1,1,1,0
+access_third_party_invoice_service,third.party.invoice.service,model_third_party_invoice_service,,1,1,1,0
+access_third_party_payment_service,third.party.payment.service,model_third_party_payment_service,,1,1,1,0
+access_third_party_check_status,third.party.check.status,model_third_party_check_status,base.group_user,1,0,0,0
+access_third_party_check_status_manager,third.party.check.status manager,model_third_party_check_status,account.group_account_manager,1,1,1,1
+access_third_party_cheque_type,third.party.cheque.type,model_third_party_cheque_type,base.group_user,1,0,0,0
+access_third_party_cheque_type_manager,third.party.cheque.type manager,model_third_party_cheque_type,account.group_account_manager,1,1,1,1
+access_third_party_cheque_collection,third.party.cheque.collection,model_third_party_cheque_collection,base.group_user,1,0,0,0
+access_third_party_cheque_collection_manager,third.party.cheque.collection manager,model_third_party_cheque_collection,account.group_account_manager,1,1,1,1
+access_third_party_sarwa_log,third.party.sarwa.log,model_third_party_sarwa_log,base.group_user,1,0,0,0
+access_third_party_sarwa_log_manager,third.party.sarwa.log manager,model_third_party_sarwa_log,account.group_account_manager,1,1,1,1

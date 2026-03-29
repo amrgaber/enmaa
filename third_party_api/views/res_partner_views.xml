@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add Reference field to Partner form for clear visibility -->
+    <record id="view_partner_form_inherit_third_party" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.third.party</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Position it below the name/company type header -->
+            <!-- We will try to add it to the Title or VAT group to be safe, or just below the name -->
+            <field name="vat" position="before">
+                <field name="ref" string="Internal Reference" placeholder="e.g. CUST-001"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Also add it to the Partner List view (tree view) for easy searching -->
+    <record id="view_partner_tree_inherit_third_party" model="ir.ui.view">
+        <field name="name">res.partner.list.inherit.third.party</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="complete_name" position="after">
+                <field name="ref" string="Reference" optional="show"/>
+            </field>
+        </field>
+    </record>
+</odoo>

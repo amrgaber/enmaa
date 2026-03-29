@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="fastapi_endpoint_view_tree" model="ir.ui.view">
+        <field name="name">fastapi.endpoint.tree</field>
+        <field name="model">fastapi.endpoint</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="root_path"/>
+                <field name="app_type"/>
+                <field name="user_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="fastapi_endpoint_view_form" model="ir.ui.view">
+        <field name="name">fastapi.endpoint.form</field>
+        <field name="model">fastapi.endpoint</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_docs"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-book"
+                                string="View Docs"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="root_path"/>
+                        </group>
+                        <group>
+                            <field name="app_type"/>
+                            <field name="user_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="fastapi_endpoint_action" model="ir.actions.act_window">
+        <field name="name">FastAPI Endpoints</field>
+        <field name="res_model">fastapi.endpoint</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_fastapi_root" name="FastAPI" parent="base.menu_administration"/>
+    <menuitem id="menu_fastapi_endpoint" name="Endpoints" parent="menu_fastapi_root" action="fastapi_endpoint_action" sequence="10"/>
+</odoo>

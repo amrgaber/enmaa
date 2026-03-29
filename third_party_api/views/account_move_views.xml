@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add Facility Type, Payout, Contract No, and Journal fields to Invoice form -->
+    <record id="view_move_form_inherit_third_party" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.third.party</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <!-- Move custom fields to Left Column -->
+            <xpath expr="//group[@id='header_left_group']" position="inside">
+                <field name="facility_type_id" 
+                       options="{'no_create': True}"
+                       invisible="move_type not in ('out_invoice', 'out_refund')"/>
+                <field name="payout_id" 
+                       options="{'no_create': True}"
+                       invisible="move_type not in ('out_invoice', 'out_refund')"/>
+                <field name="contract_no" 
+                       invisible="move_type not in ('out_invoice', 'out_refund')"/>
+                <field name="invoice_reference" 
+                       invisible="move_type not in ('out_invoice', 'out_refund')"/>
+                <field name="e_invoice_number" 
+                       invisible="move_type not in ('out_invoice', 'out_refund')"/>
+            </xpath>
+
+            <!-- Reorganize Journal and Currency in the Right Column -->
+            
+            <!-- 1. Hide the conversion rate text -->
+            <xpath expr="//div[@name='currency_conversion_div']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- 2. Hide the "in" text divider and refresh button -->
+            <xpath expr="//div[@name='in_and_refresh_button_div']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- 3. Move Journal field to its own row below Currency -->
+            <!-- We hide it in its original flexbox position -->
+            <xpath expr="//div[@name='journal_div']/field[@name='journal_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            
+            <!-- We add it as a new row in the group -->
+            <xpath expr="//div[@name='journal_div']" position="after">
+                <field name="journal_id" 
+                       string="Journal"
+                       invisible="0"
+                       options="{'no_create': True, 'no_open': True}"/>
+            </xpath>
+
+            <!-- 4. Fix row labels: Ensure the first row says "Currency" and is always visible -->
+            <xpath expr="//label[@for='journal_id'][@invisible='not show_journal']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//label[@for='currency_id']" position="attributes">
+                <attribute name="invisible">0</attribute>
+                <attribute name="groups"></attribute>
+            </xpath>
+
+            <!-- Force Currency field to be visible without multi-currency groups -->
+            <xpath expr="//div[@name='currency_div']" position="attributes">
+                <attribute name="invisible">0</attribute>
+                <attribute name="groups"></attribute>
+            </xpath>
+
+            <!-- Hide extra fields to maintain a clean two-column view -->
+            <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='ref']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_vendor_bill_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='payment_reference']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_bank_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='delivery_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

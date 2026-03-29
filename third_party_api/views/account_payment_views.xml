@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add custom fields to Payment form -->
+    <record id="view_account_payment_form_inherit_third_party" model="ir.ui.view">
+        <field name="name">account.payment.form.inherit.third.party</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <!-- Smart Button: Sarwa API Logs -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_sarwa_logs" type="object"
+                        class="oe_stat_button" icon="fa-history"
+                        invisible="sarwa_log_count == 0">
+                    <field name="sarwa_log_count" widget="statinfo" string="API Logs"/>
+                </button>
+            </xpath>
+            <!-- Left Side: Check Name after Partner/Customer -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="check_name"/>
+            </xpath>
+            
+            <!-- Left Side: Payout No. at the bottom (after memo) -->
+            <field name="memo" position="after">
+                <field name="payout_id" options="{'no_create': True}" string="Payout No."/>
+            </field>
+
+            <!-- Right Side: Move Cheque details to the right column -->
+            <xpath expr="//group[@name='group2']" position="inside">
+                <field name="cheque_no"/>
+                <field name="bank_cheque"/>
+                <field name="contract_no"/>
+                <field name="receive_date" string="Receive Date"/>
+                <field name="check_status" options="{'no_create': True}"/>
+                <field name="cheque_type" options="{'no_create': True}"/>
+                <field name="cheque_location_id" options="{'no_create': True}"/>
+                <field name="finance_bank"/>
+                <field name="remaining_amount"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Check Status List View -->
+    <record id="view_third_party_check_status_tree" model="ir.ui.view">
+        <field name="name">third.party.check.status.tree</field>
+        <field name="model">third.party.check.status</field>
+        <field name="arch" type="xml">
+            <list string="Check Statuses" editable="bottom">
+                <field name="code"/>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Check Status Form View -->
+    <record id="view_third_party_check_status_form" model="ir.ui.view">
+        <field name="name">third.party.check.status.form</field>
+        <field name="model">third.party.check.status</field>
+        <field name="arch" type="xml">
+            <form string="Check Status">
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Check Status Menu Action -->
+    <record id="action_third_party_check_status" model="ir.actions.act_window">
+        <field name="name">Check Statuses</field>
+        <field name="res_model">third.party.check.status</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Cheque Type List View -->
+    <record id="view_third_party_cheque_type_tree" model="ir.ui.view">
+        <field name="name">third.party.cheque.type.tree</field>
+        <field name="model">third.party.cheque.type</field>
+        <field name="arch" type="xml">
+            <list string="Cheque Types" editable="bottom">
+                <field name="code"/>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Cheque Type Form View -->
+    <record id="view_third_party_cheque_type_form" model="ir.ui.view">
+        <field name="name">third.party.cheque.type.form</field>
+        <field name="model">third.party.cheque.type</field>
+        <field name="arch" type="xml">
+            <form string="Cheque Type">
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Cheque Type Menu Action -->
+    <record id="action_third_party_cheque_type" model="ir.actions.act_window">
+        <field name="name">Cheque Types</field>
+        <field name="res_model">third.party.cheque.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_third_party_api_config_root"
+              name="Third Party API"
+              parent="account.menu_finance_configuration"
+              sequence="100"/>
+
+    <menuitem id="menu_third_party_check_status"
+              name="Check Statuses"
+              parent="menu_third_party_api_config_root"
+              action="action_third_party_check_status"
+              sequence="10"/>
+
+    <menuitem id="menu_third_party_cheque_type"
+              name="Cheque Types"
+              parent="menu_third_party_api_config_root"
+              action="action_third_party_cheque_type"
+              sequence="20"/>
+
+    <!-- Cheque Collection List View -->
+    <record id="view_third_party_cheque_collection_tree" model="ir.ui.view">
+        <field name="name">third.party.cheque.collection.tree</field>
+        <field name="model">third.party.cheque.collection</field>
+        <field name="arch" type="xml">
+            <list string="Cheque Collections" editable="bottom">
+                <field name="reference"/>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Cheque Collection Form View -->
+    <record id="view_third_party_cheque_collection_form" model="ir.ui.view">
+        <field name="name">third.party.cheque.collection.form</field>
+        <field name="model">third.party.cheque.collection</field>
+        <field name="arch" type="xml">
+            <form string="Cheque Collection">
+                <sheet>
+                    <group>
+                        <field name="reference"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Cheque Collection Menu Action -->
+    <record id="action_third_party_cheque_collection" model="ir.actions.act_window">
+        <field name="name">Cheque Collections</field>
+        <field name="res_model">third.party.cheque.collection</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_third_party_cheque_collection"
+              name="Cheque Collections"
+              parent="menu_third_party_api_config_root"
+              action="action_third_party_cheque_collection"
+              sequence="30"/>
+
+    <!-- Sarwa API Log List View -->
+    <record id="view_third_party_sarwa_log_tree" model="ir.ui.view">
+        <field name="name">third.party.sarwa.log.tree</field>
+        <field name="model">third.party.sarwa.log</field>
+        <field name="arch" type="xml">
+            <list string="Sarwa API Logs" create="false" edit="false">
+                <field name="create_date" string="Date"/>
+                <field name="payment_id"/>
+                <field name="cheque_no"/>
+                <field name="status_sent"/>
+                <field name="status_code_sent"/>
+                <field name="collection_amount"/>
+                <field name="finance_bank"/>
+                <field name="state" decoration-success="state == 'success'" decoration-danger="state == 'error'" widget="badge"/>
+                <field name="response_message"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Sarwa API Log Form View -->
+    <record id="view_third_party_sarwa_log_form" model="ir.ui.view">
+        <field name="name">third.party.sarwa.log.form</field>
+        <field name="model">third.party.sarwa.log</field>
+        <field name="arch" type="xml">
+            <form string="Sarwa API Log" create="false" edit="false">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Payment Info">
+                            <field name="payment_id"/>
+                            <field name="cheque_no"/>
+                            <field name="create_date" string="Date"/>
+                        </group>
+                        <group string="API Call">
+                            <field name="status_sent"/>
+                            <field name="status_code_sent"/>
+                            <field name="collection_amount"/>
+                            <field name="finance_bank"/>
+                            <field name="response_message"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Request" name="request">
+                            <group>
+                                <field name="request_data" string="Request Data"/>
+                            </group>
+                        </page>
+                        <page string="Response" name="response">
+                            <group>
+                                <field name="response_data" string="Response Data"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+</odoo>

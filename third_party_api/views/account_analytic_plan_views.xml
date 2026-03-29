@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add Reference page to Analytic Plan form -->
+    <record id="view_account_analytic_plan_form_inherit_third_party" model="ir.ui.view">
+        <field name="name">account.analytic.plan.form.inherit.third.party</field>
+        <field name="model">account.analytic.plan</field>
+        <field name="inherit_id" ref="analytic.account_analytic_plan_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="reference"/>
+            </xpath>
+            <xpath expr="//sheet" position="after">
+                <chatter/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add Reference field to Analytic Plan list -->
+    <record id="view_account_analytic_plan_list_inherit_third_party" model="ir.ui.view">
+        <field name="name">account.analytic.plan.list.inherit.third.party</field>
+        <field name="model">account.analytic.plan</field>
+        <field name="inherit_id" ref="analytic.account_analytic_plan_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="reference" string="Reference"/>
+            </field>
+        </field>
+    </record>
+</odoo>

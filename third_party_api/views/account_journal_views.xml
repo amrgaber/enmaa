@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add Reference field to Journal form -->
+    <record id="view_account_journal_form_inherit_third_party" model="ir.ui.view">
+        <field name="name">account.journal.form.inherit.third.party</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <!-- Add Reference to Journal itself -->
+            <xpath expr="//sheet" position="inside">
+                <group>
+                    <group>
+                        <field name="reference" string="Journal Reference"/>
+                    </group>
+                </group>
+            </xpath>
+
+            <!-- Add Reference to Inbound Payment Methods -->
+            <xpath expr="//field[@name='inbound_payment_method_line_ids']/list/field[@name='name']" position="after">
+                <field name="reference" string="Reference"/>
+            </xpath>
+
+            <!-- Add Reference to Outbound Payment Methods -->
+            <xpath expr="//field[@name='outbound_payment_method_line_ids']/list/field[@name='name']" position="after">
+                <field name="reference" string="Reference"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

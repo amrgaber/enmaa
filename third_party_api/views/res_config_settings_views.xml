@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sarwa API Settings Form View -->
+    <record id="res_config_settings_view_form_sarwa" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sarwa</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='account']" position="inside">
+                <block title="Sarwa Check Status API" name="sarwa_api_settings">
+                    <setting string="Sarwa API Configuration"
+                             help="Configure the Sarwa Life Insurance Check Status API credentials. When a check status changes on a payment, Odoo will automatically call this API.">
+                        <div class="content-group">
+                            <div class="row mt16">
+                                <label string="Base URL" for="sarwa_base_url" class="col-3 o_light_label"/>
+                                <field name="sarwa_base_url" class="oe_inline"/>
+                            </div>
+                            <div class="row mt8">
+                                <label string="Username" for="sarwa_username" class="col-3 o_light_label"/>
+                                <field name="sarwa_username" class="oe_inline"/>
+                            </div>
+                            <div class="row mt8">
+                                <label string="Password" for="sarwa_password" class="col-3 o_light_label"/>
+                                <field name="sarwa_password" class="oe_inline" password="True"/>
+                            </div>
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

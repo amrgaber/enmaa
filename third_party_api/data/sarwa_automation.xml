@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Server Action: Call Sarwa API on check_status change -->
+    <record id="action_server_sarwa_check_status" model="ir.actions.server">
+        <field name="name">Sarwa API: Update Check Status</field>
+        <field name="model_id" ref="account.model_account_payment"/>
+        <field name="state">code</field>
+        <field name="code">records.action_call_sarwa_change_status()</field>
+    </record>
+
+    <!-- Automation Rule: Trigger when check_status changes on account.payment -->
+    <record id="automation_sarwa_check_status_change" model="base.automation">
+        <field name="name">Sarwa API: Sync Check Status on Change</field>
+        <field name="model_id" ref="account.model_account_payment"/>
+        <field name="trigger">on_write</field>
+        <field name="trigger_field_ids" eval="[(4, ref('third_party_api.field_account_payment__check_status'))]"/>
+        <field name="action_server_ids" eval="[(4, ref('action_server_sarwa_check_status'))]"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <!-- Server Action: Call Sarwa API on finance_bank change -->
+    <record id="action_server_sarwa_finance_bank" model="ir.actions.server">
+        <field name="name">Sarwa API: Update Finance Bank</field>
+        <field name="model_id" ref="account.model_account_payment"/>
+        <field name="state">code</field>
+        <field name="code">records.action_call_sarwa_change_finance_bank()</field>
+    </record>
+
+    <!-- Automation Rule: Trigger when finance_bank changes on account.payment -->
+    <record id="automation_sarwa_finance_bank_change" model="base.automation">
+        <field name="name">Sarwa API: Sync Finance Bank on Change</field>
+        <field name="model_id" ref="account.model_account_payment"/>
+        <field name="trigger">on_write</field>
+        <field name="trigger_field_ids" eval="[(4, ref('third_party_api.field_account_payment__finance_bank'))]"/>
+        <field name="action_server_ids" eval="[(4, ref('action_server_sarwa_finance_bank'))]"/>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

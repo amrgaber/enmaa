@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Default Sarwa API Configuration Parameters -->
+    <record id="sarwa_base_url" model="ir.config_parameter">
+        <field name="key">third_party_api.sarwa_base_url</field>
+        <field name="value">http://172.16.70.2:8080/ords/nmx/odoo_check_api</field>
+    </record>
+    <record id="sarwa_username" model="ir.config_parameter">
+        <field name="key">third_party_api.sarwa_username</field>
+        <field name="value"></field>
+    </record>
+    <record id="sarwa_password" model="ir.config_parameter">
+        <field name="key">third_party_api.sarwa_password</field>
+        <field name="value"></field>
+    </record>
+    <record id="sarwa_token" model="ir.config_parameter">
+        <field name="key">third_party_api.sarwa_token</field>
+        <field name="value"></field>
+    </record>
+    <record id="sarwa_token_expiry" model="ir.config_parameter">
+        <field name="key">third_party_api.sarwa_token_expiry</field>
+        <field name="value"></field>
+    </record>
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_third_party_payment_service,third.party.payment.service,model_third_party_payment_service,base.group_user,1,1,1,1
