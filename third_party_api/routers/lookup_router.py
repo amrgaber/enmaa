@@ -170,6 +170,7 @@ Return lightweight fiscal position records for sync.
 **Response fields per item:** `id`, `name`
         """,
         dependencies=[Depends(rate_limit), Depends(jwt_auth)],
+        include_in_schema=False,
     )
     def list_fiscal_positions(
         search: Optional[str] = Query(default=None, description="Search by name"),
@@ -200,6 +201,7 @@ Return lightweight payment term records for sync.
 **Response fields per item:** `id`, `name`
         """,
         dependencies=[Depends(rate_limit), Depends(jwt_auth)],
+        include_in_schema=False,
     )
     def list_payment_terms(
         search: Optional[str] = Query(default=None, description="Search by name"),
@@ -230,6 +232,7 @@ Return lightweight company records for sync.
 **Response fields per item:** `id`, `name`
         """,
         dependencies=[Depends(rate_limit), Depends(jwt_auth)],
+        include_in_schema=False,
     )
     def list_companies(
         search: Optional[str] = Query(default=None, description="Search by name"),
@@ -395,6 +398,7 @@ Return lightweight UoM records for sync.
 **Response fields per item:** `id`, `name`
         """,
         dependencies=[Depends(rate_limit), Depends(jwt_auth)],
+        include_in_schema=False,
     )
     def list_uom(
         search: Optional[str] = Query(default=None, description="Search by name"),
@@ -429,6 +433,7 @@ Return lightweight tax records for sync.
 **Response fields per item:** `id`, `name`, `amount`, `type_tax_use`
         """,
         dependencies=[Depends(rate_limit), Depends(jwt_auth)],
+        include_in_schema=False,
     )
     def list_taxes(
         type: Optional[str] = Query(default=None, description="Tax type: sale, purchase"),
@@ -460,6 +465,7 @@ Return lightweight internal user records for sync (excludes portal/public users)
 **Response fields per item:** `id`, `name`
         """,
         dependencies=[Depends(rate_limit), Depends(jwt_auth)],
+        include_in_schema=False,
     )
     def list_users(
         search: Optional[str] = Query(default=None, description="Search by name"),
