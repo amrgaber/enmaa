@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="webhook_log_view_list" model="ir.ui.view">
+        <field name="name">webhook.log.list</field>
+        <field name="model">webhook.log</field>
+        <field name="arch" type="xml">
+            <list string="Webhook Logs" create="0" edit="0">
+                <field name="received_at"/>
+                <field name="name"/>
+                <field name="source_ip"/>
+                <field name="http_method"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'success'"
+                       decoration-danger="state == 'error'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="webhook_log_view_form" model="ir.ui.view">
+        <field name="name">webhook.log.form</field>
+        <field name="model">webhook.log</field>
+        <field name="arch" type="xml">
+            <form string="Webhook Log" create="0" edit="0">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="received_at"/>
+                        </group>
+                        <group>
+                            <field name="source_ip"/>
+                            <field name="http_method"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="JSON Payload">
+                            <field name="payload" widget="ace"/>
+                        </page>
+                        <page string="Error" invisible="state != 'error'">
+                            <field name="error_message"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="webhook_log_action" model="ir.actions.act_window">
+        <field name="name">Webhook Logs</field>
+        <field name="res_model">webhook.log</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="webhook_menu_root"
+              name="Webhooks"
+              web_icon="webhook_receiver,static/description/icon.png"
+              sequence="90"/>
+
+    <menuitem id="webhook_menu_logs"
+              name="Webhook Logs"
+              parent="webhook_menu_root"
+              action="webhook_log_action"
+              sequence="10"/>
+
+</odoo>
