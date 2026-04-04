@@ -6,6 +6,7 @@ SERVICE_DEBTOR = 'third.party.debtor.service'
 SERVICE_CONTACT = 'third.party.contact.service'
 SERVICE_INVOICE = 'third.party.invoice.service'
 SERVICE_PAYMENT = 'third.party.payment.service'
+SERVICE_LOOKUP = 'third.party.lookup.service'
 
 # Contact Types
 CONTACT_TYPE_INVOICE = 'invoice'

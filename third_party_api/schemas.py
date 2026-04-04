@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional, Union, Any, List
+from typing import Optional, Union, Any, List, Dict
 
 
 # =============================================================================
@@ -365,4 +365,111 @@ class CreditNoteResponse(BaseModel):
     original_invoice_id: Optional[int] = None
     original_invoice_name: Optional[str] = None
     reversal_date: Optional[str] = None
+    error: Optional[str] = None
+
+
+# =============================================================================
+# LOOKUP SCHEMAS (GET endpoints for relational field sync)
+# =============================================================================
+
+
+class JournalItem(BaseModel):
+    """Lightweight journal data for sync."""
+    id: int
+    name: str
+    code: Optional[str] = None
+    type: Optional[str] = None
+    reference: Optional[str] = None
+
+
+class CurrencyItem(BaseModel):
+    """Lightweight currency data for sync."""
+    id: int
+    name: str
+    symbol: Optional[str] = None
+
+
+class PartnerItem(BaseModel):
+    """Lightweight partner data for sync."""
+    id: int
+    name: str
+    ref: Optional[str] = None
+    vat: Optional[str] = None
+    email: Optional[str] = None
+
+
+class FiscalPositionItem(BaseModel):
+    """Lightweight fiscal position data for sync."""
+    id: int
+    name: str
+
+
+class PaymentTermItem(BaseModel):
+    """Lightweight payment term data for sync."""
+    id: int
+    name: str
+
+
+class CompanyItem(BaseModel):
+    """Lightweight company data for sync."""
+    id: int
+    name: str
+
+
+class AnalyticPlanItem(BaseModel):
+    """Lightweight analytic plan (facility type) data for sync."""
+    id: int
+    name: str
+    reference: Optional[str] = None
+
+
+class AnalyticAccountItem(BaseModel):
+    """Lightweight analytic account (payout) data for sync."""
+    id: int
+    name: str
+    code: Optional[str] = None
+    plan_id: Optional[int] = None
+    plan_name: Optional[str] = None
+
+
+class AccountItem(BaseModel):
+    """Lightweight chart of accounts data for sync."""
+    id: int
+    name: str
+    code: Optional[str] = None
+
+
+class ProductItem(BaseModel):
+    """Lightweight product data for sync."""
+    id: int
+    name: str
+    default_code: Optional[str] = None
+    internal_ref: Optional[str] = None
+
+
+class UomItem(BaseModel):
+    """Lightweight unit of measure data for sync."""
+    id: int
+    name: str
+
+
+class TaxItem(BaseModel):
+    """Lightweight tax data for sync."""
+    id: int
+    name: str
+    amount: Optional[float] = None
+    type_tax_use: Optional[str] = None
+
+
+class UserItem(BaseModel):
+    """Lightweight user data for sync."""
+    id: int
+    name: str
+
+
+class LookupResponse(BaseModel):
+    """Generic response wrapper for all lookup endpoints."""
+    success: bool
+    count: int = 0
+    data: List[Dict[str, Any]] = []
     error: Optional[str] = None

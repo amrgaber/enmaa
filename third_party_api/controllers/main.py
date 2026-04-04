@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from ..routers.partner_router import create_partner_router
+from ..routers.lookup_router import create_lookup_router
 from odoo.addons.fastapi_v19_authentication.routers.auth_router import create_auth_router
 
 _logger = logging.getLogger(__name__)
@@ -49,6 +50,7 @@ All endpoints require a valid JWT Bearer token. Obtain a token via the `/login` 
 | `/customer` | POST | Create or update customer by reference |
 | `/debtor` | POST | Create invoice contact under customer |
 | `/contact` | POST | Create contact with optional company |
+| `/lookup/*` | GET | Sync relational field data (journals, currencies, partners, etc.) |
 
 ### Rate Limiting
 All endpoints are rate-limited. Default: 30 requests per minute.
@@ -78,6 +80,9 @@ All endpoints are rate-limited. Default: 30 requests per minute.
 
         # Partner Router (/customer, /debtor, /contact)
         app.include_router(create_partner_router(registry, uid, context))
+
+        # Lookup Router (/lookup/journals, /lookup/currencies, etc.)
+        app.include_router(create_lookup_router(registry, uid, context))
 
         _logger.info(
             "Initialized Third Party API at %s",
